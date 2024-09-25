@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{84181564-EB4C-403C-AA8F-7C341166954B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Example1Project</RootNamespace>
+    <AssemblyName>Example1Project</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contact.cs" />
+    <Compile Include="IRepo.cs" />
+    <Compile Include="JobTitle.cs" />
+    <Compile Include="ListContact.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListContact.Designer.cs">
+      <DependentUpon>ListContact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListMemoryRepo.cs" />
+    <Compile Include="MainPageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainPageForm.Designer.cs">
+      <DependentUpon>MainPageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewContact.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewContact.Designer.cs">
+      <DependentUpon>NewContact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalaryPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalaryPage.Designer.cs">
+      <DependentUpon>SalaryPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SquareCalcForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SquareCalcForm.Designer.cs">
+      <DependentUpon>SquareCalcForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SumCalcForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SumCalcForm.Designer.cs">
+      <DependentUpon>SumCalcForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="MainPageForm.resx">
+      <DependentUpon>MainPageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewContact.resx">
+      <DependentUpon>NewContact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="SalaryPage.resx">
+      <DependentUpon>SalaryPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SquareCalcForm.resx">
+      <DependentUpon>SquareCalcForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SumCalcForm.resx">
+      <DependentUpon>SumCalcForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
