@@ -1,25 +1,44 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.11.35303.130
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example1Project", "Example1Project\Example1Project.csproj", "{84181564-EB4C-403C-AA8F-7C341166954B}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{84181564-EB4C-403C-AA8F-7C341166954B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84181564-EB4C-403C-AA8F-7C341166954B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84181564-EB4C-403C-AA8F-7C341166954B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84181564-EB4C-403C-AA8F-7C341166954B}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A5FAB102-22B0-49A9-BFB5-6A6828B19178}
-	EndGlobalSection
-EndGlobal
+<Window x:Class="PatientRegistration.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Patient Registration" Height="350" Width="600">
+    <DockPanel>
+        <!-- TabControl on top -->
+        <TabControl DockPanel.Dock="Top" Height="30">
+            <TabItem Header="Patient">
+                <!-- You can add content to the tab if needed -->
+            </TabItem>
+        </TabControl>
+
+        <!-- DockPanel for main content layout (2 frames) -->
+        <DockPanel LastChildFill="False">
+            <!-- Left frame: Patient information fields -->
+            <StackPanel DockPanel.Dock="Left" Width="350" Margin="10">
+                <TextBlock Text="Patient Name:" FontWeight="Bold" Margin="5"/>
+                <TextBox Name="txtPatientName" Margin="5" Width="200"/>
+
+                <TextBlock Text="Patient ID:" FontWeight="Bold" Margin="5"/>
+                <TextBox Name="txtPatientID" Margin="5" Width="200"/>
+
+                <TextBlock Text="Date of Birth:" FontWeight="Bold" Margin="5"/>
+                <DatePicker Name="dateOfBirthPicker" Margin="5" Width="200"/>
+
+                <TextBlock Text="Sex:" FontWeight="Bold" Margin="5"/>
+                <ComboBox Name="cmbSex" Margin="5" Width="100">
+                    <ComboBoxItem Content="Male"/>
+                    <ComboBoxItem Content="Female"/>
+                    <ComboBoxItem Content="Other"/>
+                </ComboBox>
+
+                <TextBlock Text="Scheduled Date:" FontWeight="Bold" Margin="5"/>
+                <DatePicker Name="scheduledDatePicker" Margin="5" Width="200"/>
+            </StackPanel>
+
+            <!-- Right frame: Buttons -->
+            <StackPanel DockPanel.Dock="Right" Width="200" VerticalAlignment="Center" Margin="10">
+                <Button Name="btnRegister" Content="Register" Width="100" Margin="10" HorizontalAlignment="Center"/>
+                <Button Name="btnBackup" Content="Backup" Width="100" Margin="10" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </DockPanel>
+    </DockPanel>
+</Window>
