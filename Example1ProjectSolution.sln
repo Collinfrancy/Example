@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 public class PatientViewModel : BaseViewModel
 {
     public string PatientId { get; set; }
-    public string Name { get; set; }
+    public string PatientName { get; set; }  // Updated from Name to PatientName
     public DateTime? DOB { get; set; }
     public bool IsMale { get; set; }
     public bool IsFemale { get; set; }
@@ -42,7 +42,7 @@ public class PatientViewModel : BaseViewModel
         Patient patient = new Patient
         {
             PatientId = PatientId,
-            Name = Name,
+            PatientName = PatientName,  // Updated from Name to PatientName
             DOB = DOB.Value,
             Sex = sex,
             Place = Place,
