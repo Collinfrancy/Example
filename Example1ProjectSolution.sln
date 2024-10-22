@@ -95,3 +95,59 @@ Code snippet
     <RadioButton Content="RadioButton 1" Grid.Row="4" Grid.Column="1" />
     <RadioButton Content="RadioButton 2" Grid.Row="4" Grid.Column="2" />
 </Grid>
+
+
+
+
+<Grid>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>   
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" /> <!-- Added missing RowDefinition -->
+    </Grid.RowDefinitions>
+
+    <!-- Label and Buttons for 食道撮影 -->
+    <Label Content="食道撮影" Grid.Row="0" Grid.Column="0" />
+    <Button Content="ON" Grid.Row="0" Grid.Column="1" />
+    <Button Content="OFF" Grid.Row="0" Grid.Column="2" />
+
+    <!-- Slider -->
+    <Slider Value="30" Grid.Row="1" Grid.ColumnSpan="3" />
+
+    <!-- Label and TextBoxes for 画像レベル -->
+    <Label Content="画像レベル" Grid.Row="2" Grid.Column="0" />
+    <TextBox Text="+260" Grid.Row="2" Grid.Column="1" />
+    <TextBox Text="-200" Grid.Row="2" Grid.Column="2" />
+
+    <!-- ComboBox -->
+    <ComboBox Grid.Row="3" Grid.ColumnSpan="3">
+        <ComboBoxItem Content="Item 1" />
+        <ComboBoxItem Content="Item 2" />
+        <ComboBoxItem Content="Item 3" />
+    </ComboBox>
+
+    <!-- CheckBox and RadioButtons -->
+    <CheckBox Content="圧迫筒撮影" Grid.Row="4" Grid.Column="0" />
+    <RadioButton Content="RadioButton 1" Grid.Row="4" Grid.Column="1" />
+    <RadioButton Content="RadioButton 2" Grid.Row="4" Grid.Column="2" />
+</Grid>
+By adding the missing RowDefinition for the fifth row, the grid will now be correctly structured, and the error should be resolved.
+
+
+
+
+
+
+
+
+
+
+
