@@ -1,26 +1,75 @@
-public string PatientName { get; set; }
+using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows.Input;
+using System.Xml.Serialization;
+
+public class PatientViewModel : BaseViewModel
+{
     public string PatientId { get; set; }
-    public DateTime DOB { get; set; }
-    public string Sex { get; set; }
+    public string Name { get; set; }
+    public DateTime? DOB { get; set; }
+    public bool IsMale { get; set; }
+    public bool IsFemale { get; set; }
     public string Place { get; set; }
-    public DateTime ScheduleDate 
-private void Register()
+    public DateTime? ScheduleDate { get; set; }
+
+    public ObservableCollection<string> Places { get; set; }
+    
+    public ICommand RegisterCommand { get; }
+    public ICommand BackupCommand { get; }
+
+    private string dataPath = "Data/Patient Details";
+    private string backupPath = "Data/History";
+
+    public PatientViewModel()
     {
-        var patient = new Patient
+        Places = new ObservableCollection<string> { "Place1", "Place2", "Place3" };
+
+        RegisterCommand = new RelayCommand(Register);
+        BackupCommand = new RelayCommand(Backup);
+    }
+
+    private void Register()
+    {
+        if (!Directory.Exists(dataPath))
         {
-            PatientName = PatientName,
+            Directory.CreateDirectory(dataPath);
+        }
+
+        // Save the patient data as XML
+        string sex = IsMale ? "Male" : "Female";
+        Patient patient = new Patient
+        {
             PatientId = PatientId,
-            DOB = DOB,
-            Sex = Sex,
+            Name = Name,
+            DOB = DOB.Value,
+            Sex = sex,
             Place = Place,
-            ScheduleDate = ScheduleDate
+            ScheduleDate = ScheduleDate.Value
         };
 
-        var xmlFilePath = Path.Combine("Data/Patient Details", $"{PatientId}_Details.xml");
-
-        using (var writer = new StreamWriter(xmlFilePath))
+        string filePath = Path.Combine(dataPath, $"{PatientId}_Details.xml");
+        using (FileStream fs = new FileStream(filePath, FileMode.Create))
         {
-            var serializer = new XmlSerializer(typeof(Patient));
-            serializer.Serialize(writer, patient);
+            XmlSerializer serializer = new XmlSerializer(typeof(Patient));
+            serializer.Serialize(fs, patient);
         }
     }
+
+    private void Backup()
+    {
+        if (!Directory.Exists(backupPath))
+        {
+            Directory.CreateDirectory(backupPath);
+        }
+
+        // Move all files to the backup folder
+        foreach (var file in Directory.GetFiles(dataPath))
+        {
+            string fileName = Path.GetFileName(file);
+            string destFile = Path.Combine(backupPath, fileName);
+            File.Move(file, destFile, true); // Overwrite if the file exists
+        }
+    }
+}
