@@ -1,127 +1,97 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using System.Xml.Serialization;
-using PatientProfileProject.Models;
+Gemini was just updated.  See update
 
-namespace PatientProfileProject.ViewModels
-{
-    public class PatientViewModel : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
+Conversation with Gemini
 
-        public void onPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+How can we create wpf UI of this image
 
 
 
-        private Patient _patient;
 
-      
-        public Patient Patients
-        {
-            get { return _patient; }
-            set
-            {
-                _patient = value; onPropertyChanged(nameof(Patients));
-            }
-        }
+Show drafts
+
+The image you provided appears to be a control panel for a medical device. It includes labels in Japanese, buttons, sliders, and numerical values. To create a WPF UI that mimics this control panel, you can follow these steps:
+
+Design the UI layout:
+
+Create a new WPF project in Visual Studio.
+Use the XAML designer to arrange the controls on the form.
+Use labels to display text like "食道撮影" (esophagus shooting), "圧迫筒撮影" (compression tube shooting), and "画像レベル" (image level).
+Use buttons for "ON", "OFF", and "閉じる" (close).
+Use a slider for the "30%" value.
+Use textboxes to display the numerical values (+260, -200, etc.).
+Implement the functionality:
+
+Add event handlers to the buttons and slider.
+When a button is clicked, update the corresponding state (e.g., turn "ON" or "OFF").
+When the slider is moved, update the numerical value and perform any necessary actions.
+You may need to implement additional logic based on the specific functionality of the device.
+Style the UI:
+
+Use styles and templates to customize the appearance of the controls.
+Make the UI look and feel similar to the image you provided.
+Here's a basic example of how you might create the UI in XAML:
+
+Code snippet
+<Grid>
+    <Label Content="食道撮影" />
+    <Button Content="ON" />
+    <Button Content="OFF" />
+    <Slider Value="30" />
+    <Label Content="画像レベル" />
+    <TextBox Text="+260" />
+    <TextBox Text="-200" />
+    </Grid>
+Use code with caution.
+
+You can add more controls and customize the appearance of the UI to match the image more closely. You may also need to implement additional functionality, such as data validation and error handling.
 
 
-        public ICommand RegisterCommand {  get; }
-        public ICommand BackupCommand {  get; }
-
-        public PatientViewModel()
-        {
-            Patients = new Patient
-            {
-                PatientName = "",
-                PatientId = "",
-                DOB = DateTime.Now,
-                Sex = "",
-                Place = "",
-                ScheduleDate = DateTime.Now,
-
-            };
 
 
-            RegisterCommand = new RelayCommand(Register);
-            BackupCommand = new RelayCommand(Backup);
 
 
-        }
 
-        private void Register()
-        {
-            try
-            {
+Give the xaml code for this UI
 
-                Patient newPatient = new Patient
-                {
-                    PatientName = Patients.PatientName,
-                    PatientId = Patients.PatientId,
-                    DOB = Patients.DOB,
-                    Sex = Patients.Sex,
-                    Place = Patients.Place,
-                    ScheduleDate = Patients.ScheduleDate,
-                };
 
-                var result = MessageBox.Show(messageBoxText: "Are you sure to create?",
-                    caption: "Confirm",
-                    button: MessageBoxButton.YesNo,
-                    icon: MessageBoxImage.Question);
-                if (result != MessageBoxResult.Yes)
-                {
-                    return;
-                }
 
-                var xmlFilePath = Path.Combine("Data/Patient Details", $"{newPatient.PatientId}_Details.xml");
+Show drafts
 
-                using (var writer = new StreamWriter(xmlFilePath))
-                {
-                    var serializer = new XmlSerializer(typeof(Patient));
-                    serializer.Serialize(writer, newPatient);
-                }
+The XAML code I provided in my previous response is a basic starting point for creating a UI that resembles the image you provided. However, it doesn't include all the specific elements and styling that are shown in the image.
 
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+To create a more accurate representation of the UI, you'll need to add more controls and customize their appearance. Here's a more detailed XAML code that incorporates some of the additional elements from the image:
 
-        }
+Code snippet
+<Grid>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>   
 
-        private void Backup()
-        {
-            try
-            {
-                string sourceDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Patient Details");
-                string destinationDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "History");
 
-               
-                foreach (var filePath in Directory.GetFiles(sourceDirectory))
-                {
-                    string fileName = Path.GetFileName(filePath);
-                    string destinationFilePath = Path.Combine(destinationDirectory, fileName);
-                    File.Move(filePath, destinationFilePath);
-                }
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
 
-                MessageBox.Show("Backup completed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-    }
-}
+    <Label   
+ Content="食道撮影" Grid.Row="0" Grid.Column="0" />
+    <Button Content="ON" Grid.Row="0" Grid.Column="1" />
+    <Button Content="OFF" Grid.Row="0" Grid.Column="2" />
+    <Slider Value="30" Grid.Row="1" Grid.ColumnSpan="3" />
+    <Label Content="画像レベル" Grid.Row="2" Grid.Column="0" />
+    <TextBox Text="+260" Grid.Row="2" Grid.Column="1" />
+    <TextBox Text="-200" Grid.Row="2" Grid.Column="2" />
+
+    <ComboBox Grid.Row="3" Grid.ColumnSpan="3">
+        <ComboBoxItem Content="Item 1" />
+        <ComboBoxItem Content="Item 2" />
+        <ComboBoxItem Content="Item 3" />
+    </ComboBox>
+    <CheckBox Content="圧迫筒撮影" Grid.Row="4" Grid.Column="0" />
+    <RadioButton Content="RadioButton 1" Grid.Row="4" Grid.Column="1" />
+    <RadioButton Content="RadioButton 2" Grid.Row="4" Grid.Column="2" />
+</Grid>
