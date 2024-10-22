@@ -1,75 +1,150 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Xml.Serialization;
+using PatientProfileProject.Models;
 
-public class PatientViewModel : BaseViewModel
+namespace PatientProfileProject.ViewModels
 {
-    public string PatientId { get; set; }
-    public string PatientName { get; set; }  // Updated from Name to PatientName
-    public DateTime? DOB { get; set; }
-    public bool IsMale { get; set; }
-    public bool IsFemale { get; set; }
-    public string Place { get; set; }
-    public DateTime? ScheduleDate { get; set; }
-
-    public ObservableCollection<string> Places { get; set; }
-    
-    public ICommand RegisterCommand { get; }
-    public ICommand BackupCommand { get; }
-
-    private string dataPath = "Data/Patient Details";
-    private string backupPath = "Data/History";
-
-    public PatientViewModel()
+    public class PatientViewModel : INotifyPropertyChanged
     {
-        Places = new ObservableCollection<string> { "Place1", "Place2", "Place3" };
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        RegisterCommand = new RelayCommand(Register);
-        BackupCommand = new RelayCommand(Backup);
-    }
-
-    private void Register()
-    {
-        if (!Directory.Exists(dataPath))
+        public void onPropertyChanged(string propertyName)
         {
-            Directory.CreateDirectory(dataPath);
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
-        // Save the patient data as XML
-        string sex = IsMale ? "Male" : "Female";
-        Patient patient = new Patient
-        {
-            PatientId = PatientId,
-            PatientName = PatientName,  // Updated from Name to PatientName
-            DOB = DOB.Value,
-            Sex = sex,
-            Place = Place,
-            ScheduleDate = ScheduleDate.Value
-        };
 
-        string filePath = Path.Combine(dataPath, $"{PatientId}_Details.xml");
-        using (FileStream fs = new FileStream(filePath, FileMode.Create))
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(Patient));
-            serializer.Serialize(fs, patient);
-        }
-    }
 
-    private void Backup()
-    {
-        if (!Directory.Exists(backupPath))
+        private Patient _patient;
+
+      
+        public Patient Patients
         {
-            Directory.CreateDirectory(backupPath);
+            get { return _patient; }
+            set
+            {
+                _patient = value; onPropertyChanged(nameof(Patients));
+            }
         }
 
-        // Move all files to the backup folder
-        foreach (var file in Directory.GetFiles(dataPath))
+
+        public ICommand RegisterCommand {  get; }
+        public ICommand BackupCommand {  get; }
+
+        public PatientViewModel()
         {
-            string fileName = Path.GetFileName(file);
-            string destFile = Path.Combine(backupPath, fileName);
-            File.Move(file, destFile, true); // Overwrite if the file exists
+            this.Patients = new Patient
+            {
+                PatientName = "",
+                PatientId = "",
+                DOB = DateTime.Now,
+                Sex = "",
+                Place = "",
+                ScheduleDate = DateTime.Now,
+
+            };
+
+
+            RegisterCommand = new RelayCommand(Register);
+
         }
+
+        private void Register()
+        {
+            try
+            {
+
+                Patient newPatient = new Patient
+                {
+                    PatientName = Patients.PatientName,
+                    PatientId = Patients.PatientId,
+                    DOB = Patients.DOB,
+                    Sex = Patients.Sex,
+                    Place = Patients.Place,
+                    ScheduleDate = Patients.ScheduleDate,
+                };
+                var xmlFilePath = Path.Combine("Data/Patient Details", $"{newPatient.PatientId}_Details.xml");
+
+                using (var writer = new StreamWriter(xmlFilePath))
+                {
+                    var serializer = new XmlSerializer(typeof(Patient));
+                    serializer.Serialize(writer, newPatient);
+                }
+
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+
     }
 }
+<Window x:Class="PatientProfileProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PatientProfileProject"
+        mc:Ignorable="d"
+        Title="Patient" Height="450" Width="800">
+    <Grid>
+        <TabControl Background="Orange" >
+            <TabItem Header="patient" >
+                <StackPanel Orientation="Horizontal" Margin="20"  VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <StackPanel Background="Wheat" Width="486" Height="348" >
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock x:Name="lblName"  Text="Patient Name" Width="150" VerticalAlignment="Center"></TextBlock>
+                            <TextBox x:Name="txtName" Text="{Binding PatientName}" Width="183" Height="34"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50" >
+                            <TextBlock x:Name="lblId" Text="Patient ID" Width="150" VerticalAlignment="Center"></TextBlock>
+                            <TextBox x:Name="txtId" Text="{Binding PatientId}" Width="183" Height="34"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock x:Name="lblDob" Text="DOB" Width="150" VerticalAlignment="Center"></TextBlock>
+                            <DatePicker  x:Name="DateDob" Width="182" Height="38"></DatePicker>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock x:Name="lblSex" Text="Sex" Width="150" VerticalAlignment="Center"></TextBlock>
+                            <RadioButton Content="Male" Width="83" Height="30"></RadioButton>
+                            <RadioButton Content="Female" Width="83" Height="30"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock x:Name="lblPlace" Text="Place" Width="150" VerticalAlignment="Center"></TextBlock>
+                            <ComboBox  x:Name="cmbPlace" Width="179" Height="39">
+                                <ComboBoxItem Content="Trivadrum"></ComboBoxItem>
+                                <ComboBoxItem Content="Ernakulam"></ComboBoxItem>
+                                <ComboBoxItem Content="kannur"></ComboBoxItem>
+
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock x:Name="lblScheduleDate" Text="Schedule Date" Width="150" VerticalAlignment="Center"></TextBlock>
+                            <DatePicker  x:Name="DateScheduleDate" Width="182" Height="38"></DatePicker>
+                        </StackPanel>
+                    </StackPanel>
+                    <Border Height="349" Margin="1" Background="Wheat" >
+                        <StackPanel Width="176"  Height="170"  Background="Wheat" VerticalAlignment="Center">
+                            <Button x:Name="btnRegister" Command="{Binding RegisterCommand}" Margin="10"  Background="Brown" Foreground="White" Content="Register" Height="47" Click="btnRegister_Click"/>
+                            <Button Margin="10"   Content="Backup" Background="Brown" Foreground="White" Height="45"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
