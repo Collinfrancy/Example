@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patient xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PatientName>collin</PatientName>
+  <PatientId>2</PatientId>
+  <DOB>2024-10-17T00:00:00</DOB>
+  <Sex>Male</Sex>
+  <Place>System.Windows.Controls.ComboBoxItem: Ernakulam</Place>
+  <ScheduleDate>2024-10-22T10:27:42.6792961+05:30</ScheduleDate>
+</Patient>

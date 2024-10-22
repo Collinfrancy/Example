@@ -1,0 +1,56 @@
+﻿<Window x:Class="PatientProfileProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PatientProfileProject"
+        mc:Ignorable="d"
+        Title="Patient Registration" Height="450" Width="800" Closed="Window_Closed" >
+    <Grid>
+        <TabControl Background="Orange" >
+            <TabItem Header="Patient " >
+                <StackPanel Orientation="Horizontal" Margin="20"  VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <StackPanel Background="Wheat" Width="486" Height="348" >
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock x:Name="lblName"  Text="Patient Name" Width="150" VerticalAlignment="Center"></TextBlock>
+                            <TextBox x:Name="txtName" Text="{Binding Patients.PatientName}" Width="183" Height="34"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50" >
+                            <TextBlock x:Name="lblId" Text="Patient ID" Width="150" VerticalAlignment="Center"></TextBlock>
+                            <TextBox x:Name="txtId" Text="{Binding Patients.PatientId}" Width="183" Height="34"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock x:Name="lblDob" Text="DOB" Width="150" VerticalAlignment="Center"></TextBlock>
+                            <DatePicker  x:Name="DateDob" SelectedDate="{Binding Patients.DOB}" Width="182" Height="38"></DatePicker>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock x:Name="lblSex" Text="Sex" Width="150" VerticalAlignment="Center"></TextBlock>
+                            <RadioButton Content="Male" IsChecked="{Binding Patients.Sex, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Male}"  Width="83" Height="30"></RadioButton>
+                            <RadioButton Content="Female" IsChecked="{Binding Patients.Sex, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Female}" Width="83" Height="30"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock x:Name="lblPlace" Text="Place" Width="150" VerticalAlignment="Center"></TextBlock>
+                            <ComboBox  x:Name="cmbPlace" SelectedItem="{Binding Patients.Place}" Width="179" Height="39">
+                                <ComboBoxItem Content="Trivadrum"></ComboBoxItem>
+                                <ComboBoxItem Content="Ernakulam"></ComboBoxItem>
+                                <ComboBoxItem Content="kannur"></ComboBoxItem>
+
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock x:Name="lblScheduleDate" Text="Schedule Date" Width="150" VerticalAlignment="Center"></TextBlock>
+                            <DatePicker  x:Name="DateScheduleDate" SelectedDate="{Binding Patients.ScheduleDate}" Width="182" Height="38"></DatePicker>
+                        </StackPanel>
+                    </StackPanel>
+                    <Border Height="349" Margin="1" Background="Wheat" >
+                        <StackPanel Width="176"  Height="170"  Background="Wheat" VerticalAlignment="Center">
+                            <Button x:Name="btnRegister" Command="{Binding RegisterCommand}" Margin="10"  Background="Brown" Foreground="White" Content="Register" Height="47"/>
+                            <Button x:Name="btnBackup" Margin="10" Command="{Binding BackupCommand}"   Content="Backup" Background="Brown" Foreground="White" Height="45"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>

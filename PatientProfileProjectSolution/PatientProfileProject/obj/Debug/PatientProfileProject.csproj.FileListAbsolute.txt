@@ -1,0 +1,17 @@
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\bin\Debug\PatientProfileProject.exe
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\bin\Debug\PatientProfileProject.exe.config
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\bin\Debug\PatientProfileProject.pdb
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\PatientProfileProject.csproj.AssemblyReference.cache
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\MainWindow.g.cs
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\App.g.cs
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\PatientProfileProject_MarkupCompile.cache
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\PatientProfileProject_MarkupCompile.lref
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\App.baml
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\MainWindow.baml
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\PatientProfileProject.g.resources
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\PatientProfileProject.Properties.Resources.resources
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\PatientProfileProject.csproj.GenerateResource.cache
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\PatientProfileProject.csproj.CoreCompileInputs.cache
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\PatientProfileProject.exe
+C:\Users\2021489\source\repos\PatientProfileProjectSolution\PatientProfileProject\obj\Debug\PatientProfileProject.pdb
