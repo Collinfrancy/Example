@@ -1,150 +1,29 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using System.Xml.Serialization;
-using PatientProfileProject.Models;
-
-namespace PatientProfileProject.ViewModels
-{
-    public class PatientViewModel : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void onPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-
-
-        private Patient _patient;
-
-      
-        public Patient Patients
-        {
-            get { return _patient; }
-            set
-            {
-                _patient = value; onPropertyChanged(nameof(Patients));
-            }
-        }
-
-
-        public ICommand RegisterCommand {  get; }
-        public ICommand BackupCommand {  get; }
-
-        public PatientViewModel()
-        {
-            this.Patients = new Patient
-            {
-                PatientName = "",
-                PatientId = "",
-                DOB = DateTime.Now,
-                Sex = "",
-                Place = "",
-                ScheduleDate = DateTime.Now,
-
-            };
-
-
-            RegisterCommand = new RelayCommand(Register);
-
-        }
-
-        private void Register()
+private void Backup()
         {
             try
             {
+                string sourceDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Patient Details");
+                string destinationDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "History");
 
-                Patient newPatient = new Patient
+                if (!Directory.Exists(sourceDirectory))
                 {
-                    PatientName = Patients.PatientName,
-                    PatientId = Patients.PatientId,
-                    DOB = Patients.DOB,
-                    Sex = Patients.Sex,
-                    Place = Patients.Place,
-                    ScheduleDate = Patients.ScheduleDate,
-                };
-                var xmlFilePath = Path.Combine("Data/Patient Details", $"{newPatient.PatientId}_Details.xml");
-
-                using (var writer = new StreamWriter(xmlFilePath))
-                {
-                    var serializer = new XmlSerializer(typeof(Patient));
-                    serializer.Serialize(writer, newPatient);
+                    MessageBox.Show("No patient details to backup.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
                 }
 
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                Directory.CreateDirectory(destinationDirectory); // Ensure the backup directory exists
+
+                foreach (var filePath in Directory.GetFiles(sourceDirectory))
+                {
+                    string fileName = Path.GetFileName(filePath);
+                    string destinationFilePath = Path.Combine(destinationDirectory, fileName);
+                    File.Move(filePath, destinationFilePath);
+                }
+
+                MessageBox.Show("Backup completed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-
-
-    }
-}
-<Window x:Class="PatientProfileProject.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PatientProfileProject"
-        mc:Ignorable="d"
-        Title="Patient" Height="450" Width="800">
-    <Grid>
-        <TabControl Background="Orange" >
-            <TabItem Header="patient" >
-                <StackPanel Orientation="Horizontal" Margin="20"  VerticalAlignment="Center" HorizontalAlignment="Center" >
-                    <StackPanel Background="Wheat" Width="486" Height="348" >
-                        <StackPanel Orientation="Horizontal" Height="50">
-                            <TextBlock x:Name="lblName"  Text="Patient Name" Width="150" VerticalAlignment="Center"></TextBlock>
-                            <TextBox x:Name="txtName" Text="{Binding PatientName}" Width="183" Height="34"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Height="50" >
-                            <TextBlock x:Name="lblId" Text="Patient ID" Width="150" VerticalAlignment="Center"></TextBlock>
-                            <TextBox x:Name="txtId" Text="{Binding PatientId}" Width="183" Height="34"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Height="50">
-                            <TextBlock x:Name="lblDob" Text="DOB" Width="150" VerticalAlignment="Center"></TextBlock>
-                            <DatePicker  x:Name="DateDob" Width="182" Height="38"></DatePicker>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Height="50">
-                            <TextBlock x:Name="lblSex" Text="Sex" Width="150" VerticalAlignment="Center"></TextBlock>
-                            <RadioButton Content="Male" Width="83" Height="30"></RadioButton>
-                            <RadioButton Content="Female" Width="83" Height="30"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Height="50">
-                            <TextBlock x:Name="lblPlace" Text="Place" Width="150" VerticalAlignment="Center"></TextBlock>
-                            <ComboBox  x:Name="cmbPlace" Width="179" Height="39">
-                                <ComboBoxItem Content="Trivadrum"></ComboBoxItem>
-                                <ComboBoxItem Content="Ernakulam"></ComboBoxItem>
-                                <ComboBoxItem Content="kannur"></ComboBoxItem>
-
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Height="50">
-                            <TextBlock x:Name="lblScheduleDate" Text="Schedule Date" Width="150" VerticalAlignment="Center"></TextBlock>
-                            <DatePicker  x:Name="DateScheduleDate" Width="182" Height="38"></DatePicker>
-                        </StackPanel>
-                    </StackPanel>
-                    <Border Height="349" Margin="1" Background="Wheat" >
-                        <StackPanel Width="176"  Height="170"  Background="Wheat" VerticalAlignment="Center">
-                            <Button x:Name="btnRegister" Command="{Binding RegisterCommand}" Margin="10"  Background="Brown" Foreground="White" Content="Register" Height="47" Click="btnRegister_Click"/>
-                            <Button Margin="10"   Content="Backup" Background="Brown" Foreground="White" Height="45"/>
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
-            </TabItem>
-
-        </TabControl>
-    </Grid>
-</Window>
