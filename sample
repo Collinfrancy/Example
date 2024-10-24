@@ -6,3 +6,6 @@ private void SerializeToXml(List<ButtonData> data, string filePath)
                 serializer.Serialize(writer, data);
             }
         }
+
+MessageBox.Show($"Data saved for {clickedButtons.Count} buttons.");
+        }
