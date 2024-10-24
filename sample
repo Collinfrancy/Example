@@ -1,11 +1,65 @@
-private void SerializeToXml(List<ButtonData> data, string filePath)
+private Button _selectedButton = null;  // To track the selected button
+
+        // Name and age corresponding to each button
+        private readonly Dictionary<string, (string Name, int Age)> _buttonData = new Dictionary<string, (string Name, int Age)>()
         {
-            var serializer = new XmlSerializer(typeof(List<ButtonData>));
-            using (var writer = new StreamWriter(filePath))
+            { "Button1", ("John", 25) },
+            { "Button2", ("Emma", 30) },
+            { "Button3", ("Michael", 35) },
+            { "Button4", ("Sophia", 28) },
+            { "Button5", ("Liam", 22) }
+        };
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        // Event handler for button clicks
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            // Reset the background of the previously selected button
+            if (_selectedButton != null)
             {
-                serializer.Serialize(writer, data);
+                _selectedButton.Background = Brushes.LightGray;
+            }
+
+            // Set the new selected button
+            _selectedButton = (Button)sender;
+
+            // Change the background of the selected button
+            _selectedButton.Background = Brushes.LightGreen;
+        }
+
+        // Event handler for the Save button
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selectedButton != null)
+            {
+                // Get the name of the selected button
+                string selectedButtonName = _selectedButton.Name;
+
+                // Retrieve the corresponding data
+                var (name, age) = _buttonData[selectedButtonName];
+
+                // Save the data to an XML file
+                SaveToXml(name, age);
+
+                MessageBox.Show("Data saved!");
+            }
+            else
+            {
+                MessageBox.Show("Please select a button before saving.");
             }
         }
 
-MessageBox.Show($"Data saved for {clickedButtons.Count} buttons.");
+        // Method to save the data to an XML file
+        private void SaveToXml(string name, int age)
+        {
+            XElement root = new XElement("User",
+                new XElement("Name", name),
+                new XElement("Age", age));
+
+            root.Save("SelectedButtonData.xml");
         }
+    }
