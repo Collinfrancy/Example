@@ -3,4 +3,5 @@ one xml file is configured with different tech type values such as Oneshot, sequ
 one dropdown is there and value is filled from this xml file and buttons are there for each techtypes.
 When chnage the value from dropdown, change the selection of buttons.
 Only one button is selected at a time
- 
+ based on dropdown selection, button selection should be chnaged
+the default selected one will be Oneshot
