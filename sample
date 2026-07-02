@@ -1,140 +1,32 @@
- List<TableCell> noDataCells22 = CreateMergedCell(new TableRowCell
- {
-     Title = reportCheckItem.RecommendationAging,
-     HorizontalMerge = false,
-     Span = ConvertInchToTwip(0.34).ToString(),
-     Font = "18",
-     TextDirection = TextDirectionValues.LefToRightTopToBottom,
-     underline = UnderlineValues.None,
-     MergeCells = totalVerticalMergeCellCount
- });
- for (int i = 0; i < tableRows.Count; i++)
- {
-     tableRows[i].Append(noDataCells22[i]);
- }
- List<TableCell> noDataCells1 = CreateMergedCell(new TableRowCell
- {
-     Title = reportCheckItem.RecommendationNonconformity,
-     HorizontalMerge = false,
-     Span = ConvertInchToTwip(0.34).ToString(),
-     Font = "18",
-     TextDirection = TextDirectionValues.LefToRightTopToBottom,
-     underline = UnderlineValues.None,
-     MergeCells = totalVerticalMergeCellCount
- });
- for (int i = 0; i < tableRows.Count; i++)
- {
-     tableRows[i].Append(noDataCells1[i]);
- }
- List<TableCell> noDataCells2 = CreateMergedCell(new TableRowCell
- {
-     Title = reportCheckItem.RecommendationReliability,
-     HorizontalMerge = false,
-     Span = ConvertInchToTwip(0.34).ToString(),
-     Font = "18",
-     TextDirection = TextDirectionValues.LefToRightTopToBottom,
-     underline = UnderlineValues.None,
-     MergeCells = totalVerticalMergeCellCount
- });
- for (int i = 0; i < tableRows.Count; i++)
- {
-     tableRows[i].Append(noDataCells2[i]);
- }
- List<TableCell> noDataCells3 = CreateMergedCell(new TableRowCell
- {
-     Title = reportCheckItem.RecommendationWorkability,
-     HorizontalMerge = false,
-     Span = ConvertInchToTwip(0.34).ToString(),
-     Font = "18",
-     TextDirection = TextDirectionValues.LefToRightTopToBottom,
-     underline = UnderlineValues.None,
-     MergeCells = totalVerticalMergeCellCount
- });
- for (int i = 0; i < tableRows.Count; i++)
- {
-     tableRows[i].Append(noDataCells3[i]);
- }
- List<TableCell> noDataCells4 = CreateMergedCell(new TableRowCell
- {
-     Title = reportCheckItem.RecommendationOthers,
-     HorizontalMerge = false,
-     Span = ConvertInchToTwip(0.34).ToString(),
-     Font = "18",
-     TextDirection = TextDirectionValues.LefToRightTopToBottom,
-     underline = UnderlineValues.None,
-     MergeCells = totalVerticalMergeCellCount
- });
- for (int i = 0; i < tableRows.Count; i++)
- {
-     tableRows[i].Append(noDataCells4[i]);
- }
- List<TableCell> noDataCells5 = CreateMergedCell(new TableRowCell
- {
-     Title = reportCheckItem.Reference,
-     HorizontalMerge = false,
-     Span = ConvertInchToTwip(0.34).ToString(),
-     Font = "18",
-     TextDirection = TextDirectionValues.LefToRightTopToBottom,
-     underline = UnderlineValues.None,
-     MergeCells = totalVerticalMergeCellCount
- });
- for (int i = 0; i < tableRows.Count; i++)
- {
-     tableRows[i].Append(noDataCells5[i]);
- }
- List<TableCell> noDataCells6 = CreateMergedCell(new TableRowCell
- {
-     Title = reportCheckItem.ResponseMeasures,
-     HorizontalMerge = false,
-     Span = ConvertInchToTwip(0.34).ToString(),
-     Font = "18",
-     TextDirection = TextDirectionValues.LefToRightTopToBottom,
-     underline = UnderlineValues.None,
-     MergeCells = totalVerticalMergeCellCount
- });
- for (int i = 0; i < tableRows.Count; i++)
- {
-     tableRows[i].Append(noDataCells6[i]);
- }
- List<TableCell> noDataCells7 = CreateMergedCell(new TableRowCell
- {
-     Title = reportCheckItem.ResponseSite,
-     HorizontalMerge = false,
-     Span = ConvertInchToTwip(0.34).ToString(),
-     Font = "18",
-     TextDirection = TextDirectionValues.LefToRightTopToBottom,
-     underline = UnderlineValues.None,
-     MergeCells = totalVerticalMergeCellCount
- });
- for (int i = 0; i < tableRows.Count; i++)
- {
-     tableRows[i].Append(noDataCells7[i]);
- }
- List<TableCell> noDataCells8 = CreateMergedCell(new TableRowCell
- {
-     Title = reportCheckItem.ResponseNecessity,
-     HorizontalMerge = false,
-     Span = ConvertInchToTwip(0.34).ToString(),
-     Font = "18",
-     TextDirection = TextDirectionValues.LefToRightTopToBottom,
-     underline = UnderlineValues.None,
-     MergeCells = totalVerticalMergeCellCount
- });
- for (int i = 0; i < tableRows.Count; i++)
- {
-     tableRows[i].Append(noDataCells8[i]);
- }
- List<TableCell> noDataCells9 = CreateMergedCell(new TableRowCell
- {
-     Title = reportCheckItem.ResponseIntention,
-     HorizontalMerge = false,
-     Span = ConvertInchToTwip(0.34).ToString(),
-     Font = "18",
-     TextDirection = TextDirectionValues.LefToRightTopToBottom,
-     underline = UnderlineValues.None,
-     MergeCells = totalVerticalMergeCellCount
- });
- for (int i = 0; i < tableRows.Count; i++)
- {
-     tableRows[i].Append(noDataCells9[i]);
- }
+string[] values =
+{
+    reportCheckItem.RecommendationAging,
+    reportCheckItem.RecommendationNonconformity,
+    reportCheckItem.RecommendationReliability,
+    reportCheckItem.RecommendationWorkability,
+    reportCheckItem.RecommendationOthers,
+    reportCheckItem.Reference,
+    reportCheckItem.ResponseMeasures,
+    reportCheckItem.ResponseSite,
+    reportCheckItem.ResponseNecessity,
+    reportCheckItem.ResponseIntention
+};
+
+foreach (string value in values)
+{
+    List<TableCell> cells = CreateMergedCell(new TableRowCell
+    {
+        Title = value,
+        HorizontalMerge = false,
+        Span = ConvertInchToTwip(0.34).ToString(),
+        Font = "18",
+        TextDirection = TextDirectionValues.LefToRightTopToBottom,
+        underline = UnderlineValues.None,
+        MergeCells = totalVerticalMergeCellCount
+    });
+
+    for (int i = 0; i < tableRows.Count; i++)
+    {
+        tableRows[i].Append(cells[i]);
+    }
+}
