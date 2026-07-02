@@ -1,7 +1,140 @@
-one xml file is configured with different tech type values such as Oneshot, sequence, Fluoro and DA
- 
-one dropdown is there and value is filled from this xml file and buttons are there for each techtypes.
-When chnage the value from dropdown, change the selection of buttons.
-Only one button is selected at a time
- based on dropdown selection, button selection should be chnaged
-the default selected one will be Oneshot
+ List<TableCell> noDataCells22 = CreateMergedCell(new TableRowCell
+ {
+     Title = reportCheckItem.RecommendationAging,
+     HorizontalMerge = false,
+     Span = ConvertInchToTwip(0.34).ToString(),
+     Font = "18",
+     TextDirection = TextDirectionValues.LefToRightTopToBottom,
+     underline = UnderlineValues.None,
+     MergeCells = totalVerticalMergeCellCount
+ });
+ for (int i = 0; i < tableRows.Count; i++)
+ {
+     tableRows[i].Append(noDataCells22[i]);
+ }
+ List<TableCell> noDataCells1 = CreateMergedCell(new TableRowCell
+ {
+     Title = reportCheckItem.RecommendationNonconformity,
+     HorizontalMerge = false,
+     Span = ConvertInchToTwip(0.34).ToString(),
+     Font = "18",
+     TextDirection = TextDirectionValues.LefToRightTopToBottom,
+     underline = UnderlineValues.None,
+     MergeCells = totalVerticalMergeCellCount
+ });
+ for (int i = 0; i < tableRows.Count; i++)
+ {
+     tableRows[i].Append(noDataCells1[i]);
+ }
+ List<TableCell> noDataCells2 = CreateMergedCell(new TableRowCell
+ {
+     Title = reportCheckItem.RecommendationReliability,
+     HorizontalMerge = false,
+     Span = ConvertInchToTwip(0.34).ToString(),
+     Font = "18",
+     TextDirection = TextDirectionValues.LefToRightTopToBottom,
+     underline = UnderlineValues.None,
+     MergeCells = totalVerticalMergeCellCount
+ });
+ for (int i = 0; i < tableRows.Count; i++)
+ {
+     tableRows[i].Append(noDataCells2[i]);
+ }
+ List<TableCell> noDataCells3 = CreateMergedCell(new TableRowCell
+ {
+     Title = reportCheckItem.RecommendationWorkability,
+     HorizontalMerge = false,
+     Span = ConvertInchToTwip(0.34).ToString(),
+     Font = "18",
+     TextDirection = TextDirectionValues.LefToRightTopToBottom,
+     underline = UnderlineValues.None,
+     MergeCells = totalVerticalMergeCellCount
+ });
+ for (int i = 0; i < tableRows.Count; i++)
+ {
+     tableRows[i].Append(noDataCells3[i]);
+ }
+ List<TableCell> noDataCells4 = CreateMergedCell(new TableRowCell
+ {
+     Title = reportCheckItem.RecommendationOthers,
+     HorizontalMerge = false,
+     Span = ConvertInchToTwip(0.34).ToString(),
+     Font = "18",
+     TextDirection = TextDirectionValues.LefToRightTopToBottom,
+     underline = UnderlineValues.None,
+     MergeCells = totalVerticalMergeCellCount
+ });
+ for (int i = 0; i < tableRows.Count; i++)
+ {
+     tableRows[i].Append(noDataCells4[i]);
+ }
+ List<TableCell> noDataCells5 = CreateMergedCell(new TableRowCell
+ {
+     Title = reportCheckItem.Reference,
+     HorizontalMerge = false,
+     Span = ConvertInchToTwip(0.34).ToString(),
+     Font = "18",
+     TextDirection = TextDirectionValues.LefToRightTopToBottom,
+     underline = UnderlineValues.None,
+     MergeCells = totalVerticalMergeCellCount
+ });
+ for (int i = 0; i < tableRows.Count; i++)
+ {
+     tableRows[i].Append(noDataCells5[i]);
+ }
+ List<TableCell> noDataCells6 = CreateMergedCell(new TableRowCell
+ {
+     Title = reportCheckItem.ResponseMeasures,
+     HorizontalMerge = false,
+     Span = ConvertInchToTwip(0.34).ToString(),
+     Font = "18",
+     TextDirection = TextDirectionValues.LefToRightTopToBottom,
+     underline = UnderlineValues.None,
+     MergeCells = totalVerticalMergeCellCount
+ });
+ for (int i = 0; i < tableRows.Count; i++)
+ {
+     tableRows[i].Append(noDataCells6[i]);
+ }
+ List<TableCell> noDataCells7 = CreateMergedCell(new TableRowCell
+ {
+     Title = reportCheckItem.ResponseSite,
+     HorizontalMerge = false,
+     Span = ConvertInchToTwip(0.34).ToString(),
+     Font = "18",
+     TextDirection = TextDirectionValues.LefToRightTopToBottom,
+     underline = UnderlineValues.None,
+     MergeCells = totalVerticalMergeCellCount
+ });
+ for (int i = 0; i < tableRows.Count; i++)
+ {
+     tableRows[i].Append(noDataCells7[i]);
+ }
+ List<TableCell> noDataCells8 = CreateMergedCell(new TableRowCell
+ {
+     Title = reportCheckItem.ResponseNecessity,
+     HorizontalMerge = false,
+     Span = ConvertInchToTwip(0.34).ToString(),
+     Font = "18",
+     TextDirection = TextDirectionValues.LefToRightTopToBottom,
+     underline = UnderlineValues.None,
+     MergeCells = totalVerticalMergeCellCount
+ });
+ for (int i = 0; i < tableRows.Count; i++)
+ {
+     tableRows[i].Append(noDataCells8[i]);
+ }
+ List<TableCell> noDataCells9 = CreateMergedCell(new TableRowCell
+ {
+     Title = reportCheckItem.ResponseIntention,
+     HorizontalMerge = false,
+     Span = ConvertInchToTwip(0.34).ToString(),
+     Font = "18",
+     TextDirection = TextDirectionValues.LefToRightTopToBottom,
+     underline = UnderlineValues.None,
+     MergeCells = totalVerticalMergeCellCount
+ });
+ for (int i = 0; i < tableRows.Count; i++)
+ {
+     tableRows[i].Append(noDataCells9[i]);
+ }
