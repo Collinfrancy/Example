@@ -1,32 +1,12 @@
-string[] values =
-{
-    reportCheckItem.RecommendationAging,
-    reportCheckItem.RecommendationNonconformity,
-    reportCheckItem.RecommendationReliability,
-    reportCheckItem.RecommendationWorkability,
-    reportCheckItem.RecommendationOthers,
-    reportCheckItem.Reference,
-    reportCheckItem.ResponseMeasures,
-    reportCheckItem.ResponseSite,
-    reportCheckItem.ResponseNecessity,
-    reportCheckItem.ResponseIntention
-};
+<configuration>
+  <system.webServer>
+    <security>
+      <requestFiltering>
+        <!-- 100 MB -->
+        <requestLimits maxAllowedContentLength="104857600" />
+      </requestFiltering>
+    </security>
+  </system.webServer>
+</configuration>
 
-foreach (string value in values)
-{
-    List<TableCell> cells = CreateMergedCell(new TableRowCell
-    {
-        Title = value,
-        HorizontalMerge = false,
-        Span = ConvertInchToTwip(0.34).ToString(),
-        Font = "18",
-        TextDirection = TextDirectionValues.LefToRightTopToBottom,
-        underline = UnderlineValues.None,
-        MergeCells = totalVerticalMergeCellCount
-    });
 
-    for (int i = 0; i < tableRows.Count; i++)
-    {
-        tableRows[i].Append(cells[i]);
-    }
-}
